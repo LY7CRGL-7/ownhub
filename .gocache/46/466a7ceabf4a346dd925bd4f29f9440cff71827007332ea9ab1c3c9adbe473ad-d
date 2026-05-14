@@ -1,0 +1,7 @@
+./error_reason.pb.go
+./short.pb.go
+./short_grpc.pb.go
+./short_http.pb.go
+./tool.pb.go
+./tool_grpc.pb.go
+./tool_http.pb.go

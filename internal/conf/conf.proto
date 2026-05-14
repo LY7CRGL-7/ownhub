@@ -1,0 +1,53 @@
+syntax = "proto3";
+package kratos.api;
+
+option go_package = "ownhub/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Server server = 1;
+  Data data = 2;
+  App app = 3;
+}
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message GRPC {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  HTTP http = 1;
+  GRPC grpc = 2;
+}
+
+message Data {
+  message Database {
+    string driver = 1;
+    string source = 2;
+    int32 max_open_conns = 3;
+    int32 max_idle_conns = 4;
+  }
+  message Redis {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration read_timeout = 3;
+    google.protobuf.Duration write_timeout = 4;
+  }
+  Database database = 1;
+  Redis redis = 2;
+}
+
+message App {
+  string name = 1;
+  string env = 2;
+  string public_base_url = 3;
+  string jwt_secret = 4;
+  string upload_dir = 5;
+  string github_webhook_secret = 6;
+}

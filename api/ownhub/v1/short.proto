@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package ownhub.v1;
+
+option go_package = "ownhub/api/ownhub/v1;v1";
+
+import "google/api/annotations.proto";
+
+service ShortService {
+  rpc CreateShort (CreateShortReq) returns (CreateShortReply) {
+    option (google.api.http) = {
+      post: "/api/v1/short-links"
+      body: "*"
+    };
+  }
+
+  rpc Redirect (RedirectReq) returns (RedirectReply) {
+    option (google.api.http) = {
+      get: "/api/v1/short-links/{code}"
+    };
+  }
+
+  rpc GetShort (GetShortReq) returns (GetShortReply) {
+    option (google.api.http) = {
+      get: "/api/v1/short-links/{code}/detail"
+    };
+  }
+}
+
+message CreateShortReq {
+  string url = 1;
+  string slug = 2;
+  string description = 3;
+}
+
+message CreateShortReply {
+  string code = 1;
+  string short_url = 2;
+}
+
+message RedirectReq {
+  string code = 1;
+}
+
+message RedirectReply {
+  string url = 1;
+}
+
+message GetShortReq {
+  string code = 1;
+}
+
+message GetShortReply {
+  string code = 1;
+  string url = 2;
+  string short_url = 3;
+  string description = 4;
+  int64 created_at_unix = 5;
+}

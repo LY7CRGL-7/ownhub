@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package ownhub.v1;
+
+option go_package = "ownhub/api/ownhub/v1;v1";
+
+import "google/api/annotations.proto";
+
+service ToolService {
+  rpc Ping (PingReq) returns (PingReply) {
+    option (google.api.http) = {
+      get: "/api/v1/tools/ping"
+    };
+  }
+
+  rpc GetTimestamp (GetTimestampReq) returns (GetTimestampReply) {
+    option (google.api.http) = {
+      get: "/api/v1/tools/timestamp"
+    };
+  }
+
+  rpc GenerateToken (GenerateTokenReq) returns (GenerateTokenReply) {
+    option (google.api.http) = {
+      post: "/api/v1/tools/token"
+      body: "*"
+    };
+  }
+
+  rpc DigestText (DigestTextReq) returns (DigestTextReply) {
+    option (google.api.http) = {
+      post: "/api/v1/tools/digest"  
+      body: "*"
+    };
+  }
+}
+
+message PingReq {}
+
+message PingReply {
+  string service = 1;
+  string version = 2;
+  string now = 3;
+}
+
+message GetTimestampReq {
+  string timezone = 1;
+}
+
+message GetTimestampReply {
+  int64 unix = 1;
+  string rfc3339 = 2;
+  string timezone = 3;
+}
+
+message GenerateTokenReq {
+  int32 length = 1;
+}
+
+message GenerateTokenReply {
+  string token = 1;
+  int32 length = 2;
+}
+
+message DigestTextReq {
+  string text = 1;
+  string algorithm = 2;
+}
+
+message DigestTextReply {
+  string algorithm = 1;
+  string digest = 2;
+}

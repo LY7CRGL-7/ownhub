@@ -1,0 +1,27 @@
+server:
+  http:
+    network: tcp
+    addr: 0.0.0.0:8000
+    timeout: 1s
+  grpc:
+    network: tcp
+    addr: 0.0.0.0:9000
+    timeout: 1s
+data:
+  database:
+    driver: postgres
+    source: postgres://postgres:postgres@127.0.0.1:5432/personal_backend_hub?sslmode=disable
+    max_open_conns: 20
+    max_idle_conns: 5
+  redis:
+    network: tcp
+    addr: 127.0.0.1:6379
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+app:
+  name: personal-backend-hub
+  env: local
+  public_base_url: http://localhost:8000
+  jwt_secret: change-me-in-production
+  upload_dir: ./storage/uploads
+  github_webhook_secret: ""
