@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.34.1
-// source: ownhub/v1/tool.proto
+// source: api/ownhub/v1/tool.proto
 
 package v1
 
@@ -23,6 +23,8 @@ const (
 	ToolService_GetTimestamp_FullMethodName  = "/ownhub.v1.ToolService/GetTimestamp"
 	ToolService_GenerateToken_FullMethodName = "/ownhub.v1.ToolService/GenerateToken"
 	ToolService_DigestText_FullMethodName    = "/ownhub.v1.ToolService/DigestText"
+	ToolService_AIChat_FullMethodName        = "/ownhub.v1.ToolService/AIChat"
+	ToolService_AIProcessText_FullMethodName = "/ownhub.v1.ToolService/AIProcessText"
 )
 
 // ToolServiceClient is the client API for ToolService service.
@@ -33,6 +35,10 @@ type ToolServiceClient interface {
 	GetTimestamp(ctx context.Context, in *GetTimestampReq, opts ...grpc.CallOption) (*GetTimestampReply, error)
 	GenerateToken(ctx context.Context, in *GenerateTokenReq, opts ...grpc.CallOption) (*GenerateTokenReply, error)
 	DigestText(ctx context.Context, in *DigestTextReq, opts ...grpc.CallOption) (*DigestTextReply, error)
+	// AI 聊天
+	AIChat(ctx context.Context, in *AIChatReq, opts ...grpc.CallOption) (*AIChatReply, error)
+	// AI 文本处理（翻译、总结、润色）
+	AIProcessText(ctx context.Context, in *AIProcessTextReq, opts ...grpc.CallOption) (*AIProcessTextReply, error)
 }
 
 type toolServiceClient struct {
@@ -83,6 +89,26 @@ func (c *toolServiceClient) DigestText(ctx context.Context, in *DigestTextReq, o
 	return out, nil
 }
 
+func (c *toolServiceClient) AIChat(ctx context.Context, in *AIChatReq, opts ...grpc.CallOption) (*AIChatReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AIChatReply)
+	err := c.cc.Invoke(ctx, ToolService_AIChat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *toolServiceClient) AIProcessText(ctx context.Context, in *AIProcessTextReq, opts ...grpc.CallOption) (*AIProcessTextReply, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AIProcessTextReply)
+	err := c.cc.Invoke(ctx, ToolService_AIProcessText_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ToolServiceServer is the server API for ToolService service.
 // All implementations must embed UnimplementedToolServiceServer
 // for forward compatibility.
@@ -91,6 +117,10 @@ type ToolServiceServer interface {
 	GetTimestamp(context.Context, *GetTimestampReq) (*GetTimestampReply, error)
 	GenerateToken(context.Context, *GenerateTokenReq) (*GenerateTokenReply, error)
 	DigestText(context.Context, *DigestTextReq) (*DigestTextReply, error)
+	// AI 聊天
+	AIChat(context.Context, *AIChatReq) (*AIChatReply, error)
+	// AI 文本处理（翻译、总结、润色）
+	AIProcessText(context.Context, *AIProcessTextReq) (*AIProcessTextReply, error)
 	mustEmbedUnimplementedToolServiceServer()
 }
 
@@ -112,6 +142,12 @@ func (UnimplementedToolServiceServer) GenerateToken(context.Context, *GenerateTo
 }
 func (UnimplementedToolServiceServer) DigestText(context.Context, *DigestTextReq) (*DigestTextReply, error) {
 	return nil, status.Error(codes.Unimplemented, "method DigestText not implemented")
+}
+func (UnimplementedToolServiceServer) AIChat(context.Context, *AIChatReq) (*AIChatReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method AIChat not implemented")
+}
+func (UnimplementedToolServiceServer) AIProcessText(context.Context, *AIProcessTextReq) (*AIProcessTextReply, error) {
+	return nil, status.Error(codes.Unimplemented, "method AIProcessText not implemented")
 }
 func (UnimplementedToolServiceServer) mustEmbedUnimplementedToolServiceServer() {}
 func (UnimplementedToolServiceServer) testEmbeddedByValue()                     {}
@@ -206,6 +242,42 @@ func _ToolService_DigestText_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ToolService_AIChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIChatReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ToolServiceServer).AIChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ToolService_AIChat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ToolServiceServer).AIChat(ctx, req.(*AIChatReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ToolService_AIProcessText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AIProcessTextReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ToolServiceServer).AIProcessText(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ToolService_AIProcessText_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ToolServiceServer).AIProcessText(ctx, req.(*AIProcessTextReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ToolService_ServiceDesc is the grpc.ServiceDesc for ToolService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -229,7 +301,15 @@ var ToolService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "DigestText",
 			Handler:    _ToolService_DigestText_Handler,
 		},
+		{
+			MethodName: "AIChat",
+			Handler:    _ToolService_AIChat_Handler,
+		},
+		{
+			MethodName: "AIProcessText",
+			Handler:    _ToolService_AIProcessText_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "ownhub/v1/tool.proto",
+	Metadata: "api/ownhub/v1/tool.proto",
 }

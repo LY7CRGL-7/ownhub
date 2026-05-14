@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.9.2
 // - protoc             v7.34.1
-// source: ownhub/v1/tool.proto
+// source: api/ownhub/v1/tool.proto
 
 package v1
 
@@ -19,12 +19,18 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationToolServiceAIChat = "/ownhub.v1.ToolService/AIChat"
+const OperationToolServiceAIProcessText = "/ownhub.v1.ToolService/AIProcessText"
 const OperationToolServiceDigestText = "/ownhub.v1.ToolService/DigestText"
 const OperationToolServiceGenerateToken = "/ownhub.v1.ToolService/GenerateToken"
 const OperationToolServiceGetTimestamp = "/ownhub.v1.ToolService/GetTimestamp"
 const OperationToolServicePing = "/ownhub.v1.ToolService/Ping"
 
 type ToolServiceHTTPServer interface {
+	// AIChat AI 聊天
+	AIChat(context.Context, *AIChatReq) (*AIChatReply, error)
+	// AIProcessText AI 文本处理（翻译、总结、润色）
+	AIProcessText(context.Context, *AIProcessTextReq) (*AIProcessTextReply, error)
 	DigestText(context.Context, *DigestTextReq) (*DigestTextReply, error)
 	GenerateToken(context.Context, *GenerateTokenReq) (*GenerateTokenReply, error)
 	GetTimestamp(context.Context, *GetTimestampReq) (*GetTimestampReply, error)
@@ -37,6 +43,8 @@ func RegisterToolServiceHTTPServer(s *http.Server, srv ToolServiceHTTPServer) {
 	r.GET("/api/v1/tools/timestamp", _ToolService_GetTimestamp0_HTTP_Handler(srv))
 	r.POST("/api/v1/tools/token", _ToolService_GenerateToken0_HTTP_Handler(srv))
 	r.POST("/api/v1/tools/digest", _ToolService_DigestText0_HTTP_Handler(srv))
+	r.POST("/api/v1/tools/ai/chat", _ToolService_AIChat0_HTTP_Handler(srv))
+	r.POST("/api/v1/tools/ai/process", _ToolService_AIProcessText0_HTTP_Handler(srv))
 }
 
 func _ToolService_Ping0_HTTP_Handler(srv ToolServiceHTTPServer) func(ctx http.Context) error {
@@ -121,7 +129,55 @@ func _ToolService_DigestText0_HTTP_Handler(srv ToolServiceHTTPServer) func(ctx h
 	}
 }
 
+func _ToolService_AIChat0_HTTP_Handler(srv ToolServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AIChatReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationToolServiceAIChat)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AIChat(ctx, req.(*AIChatReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AIChatReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _ToolService_AIProcessText0_HTTP_Handler(srv ToolServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AIProcessTextReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationToolServiceAIProcessText)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AIProcessText(ctx, req.(*AIProcessTextReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AIProcessTextReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type ToolServiceHTTPClient interface {
+	// AIChat AI 聊天
+	AIChat(ctx context.Context, req *AIChatReq, opts ...http.CallOption) (rsp *AIChatReply, err error)
+	// AIProcessText AI 文本处理（翻译、总结、润色）
+	AIProcessText(ctx context.Context, req *AIProcessTextReq, opts ...http.CallOption) (rsp *AIProcessTextReply, err error)
 	DigestText(ctx context.Context, req *DigestTextReq, opts ...http.CallOption) (rsp *DigestTextReply, err error)
 	GenerateToken(ctx context.Context, req *GenerateTokenReq, opts ...http.CallOption) (rsp *GenerateTokenReply, err error)
 	GetTimestamp(ctx context.Context, req *GetTimestampReq, opts ...http.CallOption) (rsp *GetTimestampReply, err error)
@@ -134,6 +190,34 @@ type ToolServiceHTTPClientImpl struct {
 
 func NewToolServiceHTTPClient(client *http.Client) ToolServiceHTTPClient {
 	return &ToolServiceHTTPClientImpl{client}
+}
+
+// AIChat AI 聊天
+func (c *ToolServiceHTTPClientImpl) AIChat(ctx context.Context, in *AIChatReq, opts ...http.CallOption) (*AIChatReply, error) {
+	var out AIChatReply
+	pattern := "/api/v1/tools/ai/chat"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationToolServiceAIChat))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// AIProcessText AI 文本处理（翻译、总结、润色）
+func (c *ToolServiceHTTPClientImpl) AIProcessText(ctx context.Context, in *AIProcessTextReq, opts ...http.CallOption) (*AIProcessTextReply, error) {
+	var out AIProcessTextReply
+	pattern := "/api/v1/tools/ai/process"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationToolServiceAIProcessText))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *ToolServiceHTTPClientImpl) DigestText(ctx context.Context, in *DigestTextReq, opts ...http.CallOption) (*DigestTextReply, error) {

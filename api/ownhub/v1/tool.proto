@@ -28,12 +28,29 @@ service ToolService {
 
   rpc DigestText (DigestTextReq) returns (DigestTextReply) {
     option (google.api.http) = {
-      post: "/api/v1/tools/digest"  
+      post: "/api/v1/tools/digest"
+      body: "*"
+    };
+  }
+
+  // AI 聊天
+  rpc AIChat (AIChatReq) returns (AIChatReply) {
+    option (google.api.http) = {
+      post: "/api/v1/tools/ai/chat"
+      body: "*"
+    };
+  }
+
+  // AI 文本处理（翻译、总结、润色）
+  rpc AIProcessText (AIProcessTextReq) returns (AIProcessTextReply) {
+    option (google.api.http) = {
+      post: "/api/v1/tools/ai/process"
       body: "*"
     };
   }
 }
 
+// ===== 现有消息定义 =====
 message PingReq {}
 
 message PingReply {
@@ -69,4 +86,34 @@ message DigestTextReq {
 message DigestTextReply {
   string algorithm = 1;
   string digest = 2;
+}
+
+// ===== 新增 AI 消息定义 =====
+message AIChatReq {
+  string message = 1;
+  string model = 2;
+  repeated ChatMessage history = 3;
+}
+
+message AIChatReply {
+  string response = 1;
+  string model = 2;
+  int64 tokens_used = 3;
+}
+
+message ChatMessage {
+  string role = 1;      // user, assistant, system
+  string content = 2;
+}
+
+message AIProcessTextReq {
+  string text = 1;
+  string action = 2;     // translate, summarize, polish, grammar
+  string target_lang = 3; // 翻译目标语言
+}
+
+message AIProcessTextReply {
+  string original = 1;
+  string processed = 2;
+  string action = 3;
 }

@@ -91,3 +91,42 @@ func (uc *ToolUsecase) DigestText(_ context.Context, text, algorithm string) (st
 		return "", "", fmt.Errorf("unsupported algorithm: %s", algorithm)
 	}
 }
+
+// ========== AI 方法 ==========
+
+// ChatMessage 对话消息
+type ChatMessage struct {
+	Role    string
+	Content string
+}
+
+// AIChat AI 聊天
+func (uc *ToolUsecase) AIChat(ctx context.Context, message string, model string, history []ChatMessage) (string, error) {
+	// 简单模拟响应，便于测试
+	response := fmt.Sprintf("AI 响应：\n\n你发送的消息是：「%s」\n\n模型：%s\n历史消息数：%d",
+		message, model, len(history))
+	return response, nil
+}
+
+// AIProcessText AI 文本处理
+func (uc *ToolUsecase) AIProcessText(ctx context.Context, text, action, targetLang string) (string, error) {
+	var result string
+
+	switch action {
+	case "translate":
+		if targetLang == "" {
+			targetLang = "中文"
+		}
+		result = fmt.Sprintf("翻译结果（%s）：\n原文：%s\n译文：%s", targetLang, text, text)
+	case "summarize":
+		result = fmt.Sprintf("总结：\n原文长度：%d字\n%s", len(text), text)
+	case "polish":
+		result = fmt.Sprintf("润色结果：\n%s", text)
+	case "grammar":
+		result = fmt.Sprintf("语法修正：\n%s", text)
+	default:
+		result = fmt.Sprintf("操作「%s」处理结果：\n%s", action, text)
+	}
+
+	return result, nil
+}

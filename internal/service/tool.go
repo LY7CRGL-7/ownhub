@@ -15,7 +15,9 @@ type ToolService struct {
 }
 
 func NewToolService(uc *biz.ToolUsecase) *ToolService {
-	return &ToolService{uc: uc}
+	return &ToolService{
+		uc: uc,
+	}
 }
 
 func (s *ToolService) Ping(ctx context.Context, _ *v1.PingReq) (*v1.PingReply, error) {
@@ -58,5 +60,41 @@ func (s *ToolService) DigestText(ctx context.Context, req *v1.DigestTextReq) (*v
 	return &v1.DigestTextReply{
 		Algorithm: algorithm,
 		Digest:    digest,
+	}, nil
+}
+
+// AIChat AI 聊天
+func (s *ToolService) AIChat(ctx context.Context, req *v1.AIChatReq) (*v1.AIChatReply, error) {
+	// 转换历史消息
+	var history []biz.ChatMessage
+	for _, msg := range req.History {
+		history = append(history, biz.ChatMessage{
+			Role:    msg.Role,
+			Content: msg.Content,
+		})
+	}
+
+	response, err := s.uc.AIChat(ctx, req.Message, req.Model, history)
+	if err != nil {
+		return nil, err
+	}
+
+	return &v1.AIChatReply{
+		Response: response,
+		Model:    req.Model,
+	}, nil
+}
+
+// AIProcessText AI 文本处理
+func (s *ToolService) AIProcessText(ctx context.Context, req *v1.AIProcessTextReq) (*v1.AIProcessTextReply, error) {
+	processed, err := s.uc.AIProcessText(ctx, req.Text, req.Action, req.TargetLang)
+	if err != nil {
+		return nil, err
+	}
+
+	return &v1.AIProcessTextReply{
+		Original:  req.Text,
+		Processed: processed,
+		Action:    req.Action,
 	}, nil
 }

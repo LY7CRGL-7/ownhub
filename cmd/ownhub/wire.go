@@ -15,12 +15,34 @@ import (
 	"ownhub/internal/service"
 )
 
+// 👇 把 Bootstrap 拆成各个子配置
+func newServer(c *conf.Bootstrap) *conf.Server {
+	return c.Server
+}
+
+func newData(c *conf.Bootstrap) *conf.Data {
+	return c.Data
+}
+
+func newAppConf(c *conf.Bootstrap) *conf.App {
+	return c.App
+}
+
+// 👇 组装 Provider
+var ProviderSet = wire.NewSet(
+	server.ProviderSet,
+	data.ProviderSet,
+	biz.ProviderSet,
+	service.ProviderSet,
+
+	newServer,
+	newData,
+	newAppConf,
+
+	newApp,
+)
+
+// 👇 入口
 func wireApp(*conf.Bootstrap, log.Logger) (*kratos.App, func(), error) {
-	panic(wire.Build(
-		data.ProviderSet,
-		biz.ProviderSet,
-		service.ProviderSet,
-		server.ProviderSet,
-		newApp,
-	))
+	panic(wire.Build(ProviderSet))
 }

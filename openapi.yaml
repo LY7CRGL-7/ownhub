@@ -3,18 +3,109 @@
 
 openapi: 3.0.3
 info:
-    title: ShortService API
+    title: ToolService API
     version: 0.0.1
 paths:
-    /s/{code}:
+    /api/v1/tools/ai/chat:
+        post:
+            tags:
+                - ToolService
+            description: AI 聊天
+            operationId: ToolService_AIChat
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AIChatReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AIChatReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/v1/tools/ai/process:
+        post:
+            tags:
+                - ToolService
+            description: AI 文本处理（翻译、总结、润色）
+            operationId: ToolService_AIProcessText
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AIProcessTextReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AIProcessTextReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/v1/tools/digest:
+        post:
+            tags:
+                - ToolService
+            operationId: ToolService_DigestText
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DigestTextReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DigestTextReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/v1/tools/ping:
         get:
             tags:
-                - ShortService
-            operationId: ShortService_Redirect
+                - ToolService
+            operationId: ToolService_Ping
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PingReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/v1/tools/timestamp:
+        get:
+            tags:
+                - ToolService
+            operationId: ToolService_GetTimestamp
             parameters:
-                - name: code
-                  in: path
-                  required: true
+                - name: timezone
+                  in: query
                   schema:
                     type: string
             responses:
@@ -23,23 +114,23 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/RedirectReply'
+                                $ref: '#/components/schemas/GetTimestampReply'
                 default:
                     description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /short/create:
+    /api/v1/tools/token:
         post:
             tags:
-                - ShortService
-            operationId: ShortService_CreateShort
+                - ToolService
+            operationId: ToolService_GenerateToken
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/CreateShortReq'
+                            $ref: '#/components/schemas/GenerateTokenReq'
                 required: true
             responses:
                 "200":
@@ -47,7 +138,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/CreateShortReply'
+                                $ref: '#/components/schemas/GenerateTokenReply'
                 default:
                     description: Default error response
                     content:
@@ -56,15 +147,88 @@ paths:
                                 $ref: '#/components/schemas/Status'
 components:
     schemas:
-        CreateShortReply:
+        AIChatReply:
             type: object
             properties:
-                shortUrl:
+                response:
                     type: string
-        CreateShortReq:
+                model:
+                    type: string
+                tokensUsed:
+                    type: string
+        AIChatReq:
             type: object
             properties:
-                url:
+                message:
+                    type: string
+                model:
+                    type: string
+                history:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ChatMessage'
+            description: ===== 新增 AI 消息定义 =====
+        AIProcessTextReply:
+            type: object
+            properties:
+                original:
+                    type: string
+                processed:
+                    type: string
+                action:
+                    type: string
+        AIProcessTextReq:
+            type: object
+            properties:
+                text:
+                    type: string
+                action:
+                    type: string
+                targetLang:
+                    type: string
+        ChatMessage:
+            type: object
+            properties:
+                role:
+                    type: string
+                content:
+                    type: string
+        DigestTextReply:
+            type: object
+            properties:
+                algorithm:
+                    type: string
+                digest:
+                    type: string
+        DigestTextReq:
+            type: object
+            properties:
+                text:
+                    type: string
+                algorithm:
+                    type: string
+        GenerateTokenReply:
+            type: object
+            properties:
+                token:
+                    type: string
+                length:
+                    type: integer
+                    format: int32
+        GenerateTokenReq:
+            type: object
+            properties:
+                length:
+                    type: integer
+                    format: int32
+        GetTimestampReply:
+            type: object
+            properties:
+                unix:
+                    type: string
+                rfc3339:
+                    type: string
+                timezone:
                     type: string
         GoogleProtobufAny:
             type: object
@@ -74,10 +238,14 @@ components:
                     description: The type of the serialized message.
             additionalProperties: true
             description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
-        RedirectReply:
+        PingReply:
             type: object
             properties:
-                url:
+                service:
+                    type: string
+                version:
+                    type: string
+                now:
                     type: string
         Status:
             type: object
@@ -96,4 +264,4 @@ components:
                     description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
             description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
 tags:
-    - name: ShortService
+    - name: ToolService

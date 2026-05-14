@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v7.34.1
-// source: ownhub/v1/tool.proto
+// source: api/ownhub/v1/tool.proto
 
 package v1
 
@@ -22,6 +22,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// ===== 现有消息定义 =====
 type PingReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -30,7 +31,7 @@ type PingReq struct {
 
 func (x *PingReq) Reset() {
 	*x = PingReq{}
-	mi := &file_ownhub_v1_tool_proto_msgTypes[0]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +43,7 @@ func (x *PingReq) String() string {
 func (*PingReq) ProtoMessage() {}
 
 func (x *PingReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ownhub_v1_tool_proto_msgTypes[0]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +56,7 @@ func (x *PingReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PingReq.ProtoReflect.Descriptor instead.
 func (*PingReq) Descriptor() ([]byte, []int) {
-	return file_ownhub_v1_tool_proto_rawDescGZIP(), []int{0}
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{0}
 }
 
 type PingReply struct {
@@ -69,7 +70,7 @@ type PingReply struct {
 
 func (x *PingReply) Reset() {
 	*x = PingReply{}
-	mi := &file_ownhub_v1_tool_proto_msgTypes[1]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -81,7 +82,7 @@ func (x *PingReply) String() string {
 func (*PingReply) ProtoMessage() {}
 
 func (x *PingReply) ProtoReflect() protoreflect.Message {
-	mi := &file_ownhub_v1_tool_proto_msgTypes[1]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -94,7 +95,7 @@ func (x *PingReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PingReply.ProtoReflect.Descriptor instead.
 func (*PingReply) Descriptor() ([]byte, []int) {
-	return file_ownhub_v1_tool_proto_rawDescGZIP(), []int{1}
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *PingReply) GetService() string {
@@ -127,7 +128,7 @@ type GetTimestampReq struct {
 
 func (x *GetTimestampReq) Reset() {
 	*x = GetTimestampReq{}
-	mi := &file_ownhub_v1_tool_proto_msgTypes[2]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -139,7 +140,7 @@ func (x *GetTimestampReq) String() string {
 func (*GetTimestampReq) ProtoMessage() {}
 
 func (x *GetTimestampReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ownhub_v1_tool_proto_msgTypes[2]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -152,7 +153,7 @@ func (x *GetTimestampReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTimestampReq.ProtoReflect.Descriptor instead.
 func (*GetTimestampReq) Descriptor() ([]byte, []int) {
-	return file_ownhub_v1_tool_proto_rawDescGZIP(), []int{2}
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetTimestampReq) GetTimezone() string {
@@ -173,7 +174,7 @@ type GetTimestampReply struct {
 
 func (x *GetTimestampReply) Reset() {
 	*x = GetTimestampReply{}
-	mi := &file_ownhub_v1_tool_proto_msgTypes[3]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -185,7 +186,7 @@ func (x *GetTimestampReply) String() string {
 func (*GetTimestampReply) ProtoMessage() {}
 
 func (x *GetTimestampReply) ProtoReflect() protoreflect.Message {
-	mi := &file_ownhub_v1_tool_proto_msgTypes[3]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -198,7 +199,7 @@ func (x *GetTimestampReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTimestampReply.ProtoReflect.Descriptor instead.
 func (*GetTimestampReply) Descriptor() ([]byte, []int) {
-	return file_ownhub_v1_tool_proto_rawDescGZIP(), []int{3}
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetTimestampReply) GetUnix() int64 {
@@ -231,7 +232,7 @@ type GenerateTokenReq struct {
 
 func (x *GenerateTokenReq) Reset() {
 	*x = GenerateTokenReq{}
-	mi := &file_ownhub_v1_tool_proto_msgTypes[4]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -243,7 +244,7 @@ func (x *GenerateTokenReq) String() string {
 func (*GenerateTokenReq) ProtoMessage() {}
 
 func (x *GenerateTokenReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ownhub_v1_tool_proto_msgTypes[4]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -256,7 +257,7 @@ func (x *GenerateTokenReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateTokenReq.ProtoReflect.Descriptor instead.
 func (*GenerateTokenReq) Descriptor() ([]byte, []int) {
-	return file_ownhub_v1_tool_proto_rawDescGZIP(), []int{4}
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GenerateTokenReq) GetLength() int32 {
@@ -276,7 +277,7 @@ type GenerateTokenReply struct {
 
 func (x *GenerateTokenReply) Reset() {
 	*x = GenerateTokenReply{}
-	mi := &file_ownhub_v1_tool_proto_msgTypes[5]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -288,7 +289,7 @@ func (x *GenerateTokenReply) String() string {
 func (*GenerateTokenReply) ProtoMessage() {}
 
 func (x *GenerateTokenReply) ProtoReflect() protoreflect.Message {
-	mi := &file_ownhub_v1_tool_proto_msgTypes[5]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -301,7 +302,7 @@ func (x *GenerateTokenReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateTokenReply.ProtoReflect.Descriptor instead.
 func (*GenerateTokenReply) Descriptor() ([]byte, []int) {
-	return file_ownhub_v1_tool_proto_rawDescGZIP(), []int{5}
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GenerateTokenReply) GetToken() string {
@@ -328,7 +329,7 @@ type DigestTextReq struct {
 
 func (x *DigestTextReq) Reset() {
 	*x = DigestTextReq{}
-	mi := &file_ownhub_v1_tool_proto_msgTypes[6]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -340,7 +341,7 @@ func (x *DigestTextReq) String() string {
 func (*DigestTextReq) ProtoMessage() {}
 
 func (x *DigestTextReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ownhub_v1_tool_proto_msgTypes[6]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -353,7 +354,7 @@ func (x *DigestTextReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DigestTextReq.ProtoReflect.Descriptor instead.
 func (*DigestTextReq) Descriptor() ([]byte, []int) {
-	return file_ownhub_v1_tool_proto_rawDescGZIP(), []int{6}
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DigestTextReq) GetText() string {
@@ -380,7 +381,7 @@ type DigestTextReply struct {
 
 func (x *DigestTextReply) Reset() {
 	*x = DigestTextReply{}
-	mi := &file_ownhub_v1_tool_proto_msgTypes[7]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -392,7 +393,7 @@ func (x *DigestTextReply) String() string {
 func (*DigestTextReply) ProtoMessage() {}
 
 func (x *DigestTextReply) ProtoReflect() protoreflect.Message {
-	mi := &file_ownhub_v1_tool_proto_msgTypes[7]
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -405,7 +406,7 @@ func (x *DigestTextReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DigestTextReply.ProtoReflect.Descriptor instead.
 func (*DigestTextReply) Descriptor() ([]byte, []int) {
-	return file_ownhub_v1_tool_proto_rawDescGZIP(), []int{7}
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DigestTextReply) GetAlgorithm() string {
@@ -422,11 +423,304 @@ func (x *DigestTextReply) GetDigest() string {
 	return ""
 }
 
-var File_ownhub_v1_tool_proto protoreflect.FileDescriptor
+// ===== 新增 AI 消息定义 =====
+type AIChatReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Model         string                 `protobuf:"bytes,2,opt,name=model,proto3" json:"model,omitempty"`
+	History       []*ChatMessage         `protobuf:"bytes,3,rep,name=history,proto3" json:"history,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
 
-const file_ownhub_v1_tool_proto_rawDesc = "" +
+func (x *AIChatReq) Reset() {
+	*x = AIChatReq{}
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIChatReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIChatReq) ProtoMessage() {}
+
+func (x *AIChatReq) ProtoReflect() protoreflect.Message {
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIChatReq.ProtoReflect.Descriptor instead.
+func (*AIChatReq) Descriptor() ([]byte, []int) {
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *AIChatReq) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *AIChatReq) GetModel() string {
+	if x != nil {
+		return x.Model
+	}
+	return ""
+}
+
+func (x *AIChatReq) GetHistory() []*ChatMessage {
+	if x != nil {
+		return x.History
+	}
+	return nil
+}
+
+type AIChatReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Response      string                 `protobuf:"bytes,1,opt,name=response,proto3" json:"response,omitempty"`
+	Model         string                 `protobuf:"bytes,2,opt,name=model,proto3" json:"model,omitempty"`
+	TokensUsed    int64                  `protobuf:"varint,3,opt,name=tokens_used,json=tokensUsed,proto3" json:"tokens_used,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIChatReply) Reset() {
+	*x = AIChatReply{}
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIChatReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIChatReply) ProtoMessage() {}
+
+func (x *AIChatReply) ProtoReflect() protoreflect.Message {
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIChatReply.ProtoReflect.Descriptor instead.
+func (*AIChatReply) Descriptor() ([]byte, []int) {
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *AIChatReply) GetResponse() string {
+	if x != nil {
+		return x.Response
+	}
+	return ""
+}
+
+func (x *AIChatReply) GetModel() string {
+	if x != nil {
+		return x.Model
+	}
+	return ""
+}
+
+func (x *AIChatReply) GetTokensUsed() int64 {
+	if x != nil {
+		return x.TokensUsed
+	}
+	return 0
+}
+
+type ChatMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Role          string                 `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"` // user, assistant, system
+	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChatMessage) Reset() {
+	*x = ChatMessage{}
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChatMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChatMessage) ProtoMessage() {}
+
+func (x *ChatMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChatMessage.ProtoReflect.Descriptor instead.
+func (*ChatMessage) Descriptor() ([]byte, []int) {
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ChatMessage) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
+func (x *ChatMessage) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+type AIProcessTextReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Text          string                 `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`                           // translate, summarize, polish, grammar
+	TargetLang    string                 `protobuf:"bytes,3,opt,name=target_lang,json=targetLang,proto3" json:"target_lang,omitempty"` // 翻译目标语言
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIProcessTextReq) Reset() {
+	*x = AIProcessTextReq{}
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIProcessTextReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIProcessTextReq) ProtoMessage() {}
+
+func (x *AIProcessTextReq) ProtoReflect() protoreflect.Message {
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIProcessTextReq.ProtoReflect.Descriptor instead.
+func (*AIProcessTextReq) Descriptor() ([]byte, []int) {
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *AIProcessTextReq) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+func (x *AIProcessTextReq) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+func (x *AIProcessTextReq) GetTargetLang() string {
+	if x != nil {
+		return x.TargetLang
+	}
+	return ""
+}
+
+type AIProcessTextReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Original      string                 `protobuf:"bytes,1,opt,name=original,proto3" json:"original,omitempty"`
+	Processed     string                 `protobuf:"bytes,2,opt,name=processed,proto3" json:"processed,omitempty"`
+	Action        string                 `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AIProcessTextReply) Reset() {
+	*x = AIProcessTextReply{}
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AIProcessTextReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AIProcessTextReply) ProtoMessage() {}
+
+func (x *AIProcessTextReply) ProtoReflect() protoreflect.Message {
+	mi := &file_api_ownhub_v1_tool_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AIProcessTextReply.ProtoReflect.Descriptor instead.
+func (*AIProcessTextReply) Descriptor() ([]byte, []int) {
+	return file_api_ownhub_v1_tool_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *AIProcessTextReply) GetOriginal() string {
+	if x != nil {
+		return x.Original
+	}
+	return ""
+}
+
+func (x *AIProcessTextReply) GetProcessed() string {
+	if x != nil {
+		return x.Processed
+	}
+	return ""
+}
+
+func (x *AIProcessTextReply) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+var File_api_ownhub_v1_tool_proto protoreflect.FileDescriptor
+
+const file_api_ownhub_v1_tool_proto_rawDesc = "" +
 	"\n" +
-	"\x14ownhub/v1/tool.proto\x12\townhub.v1\x1a\x1cgoogle/api/annotations.proto\"\t\n" +
+	"\x18api/ownhub/v1/tool.proto\x12\townhub.v1\x1a\x1cgoogle/api/annotations.proto\"\t\n" +
 	"\aPingReq\"Q\n" +
 	"\tPingReply\x12\x18\n" +
 	"\aservice\x18\x01 \x01(\tR\aservice\x12\x18\n" +
@@ -448,28 +742,51 @@ const file_ownhub_v1_tool_proto_rawDesc = "" +
 	"\talgorithm\x18\x02 \x01(\tR\talgorithm\"G\n" +
 	"\x0fDigestTextReply\x12\x1c\n" +
 	"\talgorithm\x18\x01 \x01(\tR\talgorithm\x12\x16\n" +
-	"\x06digest\x18\x02 \x01(\tR\x06digest2\x98\x03\n" +
+	"\x06digest\x18\x02 \x01(\tR\x06digest\"m\n" +
+	"\tAIChatReq\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x12\x14\n" +
+	"\x05model\x18\x02 \x01(\tR\x05model\x120\n" +
+	"\ahistory\x18\x03 \x03(\v2\x16.ownhub.v1.ChatMessageR\ahistory\"`\n" +
+	"\vAIChatReply\x12\x1a\n" +
+	"\bresponse\x18\x01 \x01(\tR\bresponse\x12\x14\n" +
+	"\x05model\x18\x02 \x01(\tR\x05model\x12\x1f\n" +
+	"\vtokens_used\x18\x03 \x01(\x03R\n" +
+	"tokensUsed\";\n" +
+	"\vChatMessage\x12\x12\n" +
+	"\x04role\x18\x01 \x01(\tR\x04role\x12\x18\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\"_\n" +
+	"\x10AIProcessTextReq\x12\x12\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x12\x16\n" +
+	"\x06action\x18\x02 \x01(\tR\x06action\x12\x1f\n" +
+	"\vtarget_lang\x18\x03 \x01(\tR\n" +
+	"targetLang\"f\n" +
+	"\x12AIProcessTextReply\x12\x1a\n" +
+	"\boriginal\x18\x01 \x01(\tR\boriginal\x12\x1c\n" +
+	"\tprocessed\x18\x02 \x01(\tR\tprocessed\x12\x16\n" +
+	"\x06action\x18\x03 \x01(\tR\x06action2\xe4\x04\n" +
 	"\vToolService\x12L\n" +
 	"\x04Ping\x12\x12.ownhub.v1.PingReq\x1a\x14.ownhub.v1.PingReply\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/api/v1/tools/ping\x12i\n" +
 	"\fGetTimestamp\x12\x1a.ownhub.v1.GetTimestampReq\x1a\x1c.ownhub.v1.GetTimestampReply\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/tools/timestamp\x12k\n" +
 	"\rGenerateToken\x12\x1b.ownhub.v1.GenerateTokenReq\x1a\x1d.ownhub.v1.GenerateTokenReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/v1/tools/token\x12c\n" +
 	"\n" +
-	"DigestText\x12\x18.ownhub.v1.DigestTextReq\x1a\x1a.ownhub.v1.DigestTextReply\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/tools/digestB\x19Z\x17ownhub/api/ownhub/v1;v1b\x06proto3"
+	"DigestText\x12\x18.ownhub.v1.DigestTextReq\x1a\x1a.ownhub.v1.DigestTextReply\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/tools/digest\x12X\n" +
+	"\x06AIChat\x12\x14.ownhub.v1.AIChatReq\x1a\x16.ownhub.v1.AIChatReply\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/tools/ai/chat\x12p\n" +
+	"\rAIProcessText\x12\x1b.ownhub.v1.AIProcessTextReq\x1a\x1d.ownhub.v1.AIProcessTextReply\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/api/v1/tools/ai/processB\x19Z\x17ownhub/api/ownhub/v1;v1b\x06proto3"
 
 var (
-	file_ownhub_v1_tool_proto_rawDescOnce sync.Once
-	file_ownhub_v1_tool_proto_rawDescData []byte
+	file_api_ownhub_v1_tool_proto_rawDescOnce sync.Once
+	file_api_ownhub_v1_tool_proto_rawDescData []byte
 )
 
-func file_ownhub_v1_tool_proto_rawDescGZIP() []byte {
-	file_ownhub_v1_tool_proto_rawDescOnce.Do(func() {
-		file_ownhub_v1_tool_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_ownhub_v1_tool_proto_rawDesc), len(file_ownhub_v1_tool_proto_rawDesc)))
+func file_api_ownhub_v1_tool_proto_rawDescGZIP() []byte {
+	file_api_ownhub_v1_tool_proto_rawDescOnce.Do(func() {
+		file_api_ownhub_v1_tool_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_ownhub_v1_tool_proto_rawDesc), len(file_api_ownhub_v1_tool_proto_rawDesc)))
 	})
-	return file_ownhub_v1_tool_proto_rawDescData
+	return file_api_ownhub_v1_tool_proto_rawDescData
 }
 
-var file_ownhub_v1_tool_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
-var file_ownhub_v1_tool_proto_goTypes = []any{
+var file_api_ownhub_v1_tool_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_api_ownhub_v1_tool_proto_goTypes = []any{
 	(*PingReq)(nil),            // 0: ownhub.v1.PingReq
 	(*PingReply)(nil),          // 1: ownhub.v1.PingReply
 	(*GetTimestampReq)(nil),    // 2: ownhub.v1.GetTimestampReq
@@ -478,43 +795,53 @@ var file_ownhub_v1_tool_proto_goTypes = []any{
 	(*GenerateTokenReply)(nil), // 5: ownhub.v1.GenerateTokenReply
 	(*DigestTextReq)(nil),      // 6: ownhub.v1.DigestTextReq
 	(*DigestTextReply)(nil),    // 7: ownhub.v1.DigestTextReply
+	(*AIChatReq)(nil),          // 8: ownhub.v1.AIChatReq
+	(*AIChatReply)(nil),        // 9: ownhub.v1.AIChatReply
+	(*ChatMessage)(nil),        // 10: ownhub.v1.ChatMessage
+	(*AIProcessTextReq)(nil),   // 11: ownhub.v1.AIProcessTextReq
+	(*AIProcessTextReply)(nil), // 12: ownhub.v1.AIProcessTextReply
 }
-var file_ownhub_v1_tool_proto_depIdxs = []int32{
-	0, // 0: ownhub.v1.ToolService.Ping:input_type -> ownhub.v1.PingReq
-	2, // 1: ownhub.v1.ToolService.GetTimestamp:input_type -> ownhub.v1.GetTimestampReq
-	4, // 2: ownhub.v1.ToolService.GenerateToken:input_type -> ownhub.v1.GenerateTokenReq
-	6, // 3: ownhub.v1.ToolService.DigestText:input_type -> ownhub.v1.DigestTextReq
-	1, // 4: ownhub.v1.ToolService.Ping:output_type -> ownhub.v1.PingReply
-	3, // 5: ownhub.v1.ToolService.GetTimestamp:output_type -> ownhub.v1.GetTimestampReply
-	5, // 6: ownhub.v1.ToolService.GenerateToken:output_type -> ownhub.v1.GenerateTokenReply
-	7, // 7: ownhub.v1.ToolService.DigestText:output_type -> ownhub.v1.DigestTextReply
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+var file_api_ownhub_v1_tool_proto_depIdxs = []int32{
+	10, // 0: ownhub.v1.AIChatReq.history:type_name -> ownhub.v1.ChatMessage
+	0,  // 1: ownhub.v1.ToolService.Ping:input_type -> ownhub.v1.PingReq
+	2,  // 2: ownhub.v1.ToolService.GetTimestamp:input_type -> ownhub.v1.GetTimestampReq
+	4,  // 3: ownhub.v1.ToolService.GenerateToken:input_type -> ownhub.v1.GenerateTokenReq
+	6,  // 4: ownhub.v1.ToolService.DigestText:input_type -> ownhub.v1.DigestTextReq
+	8,  // 5: ownhub.v1.ToolService.AIChat:input_type -> ownhub.v1.AIChatReq
+	11, // 6: ownhub.v1.ToolService.AIProcessText:input_type -> ownhub.v1.AIProcessTextReq
+	1,  // 7: ownhub.v1.ToolService.Ping:output_type -> ownhub.v1.PingReply
+	3,  // 8: ownhub.v1.ToolService.GetTimestamp:output_type -> ownhub.v1.GetTimestampReply
+	5,  // 9: ownhub.v1.ToolService.GenerateToken:output_type -> ownhub.v1.GenerateTokenReply
+	7,  // 10: ownhub.v1.ToolService.DigestText:output_type -> ownhub.v1.DigestTextReply
+	9,  // 11: ownhub.v1.ToolService.AIChat:output_type -> ownhub.v1.AIChatReply
+	12, // 12: ownhub.v1.ToolService.AIProcessText:output_type -> ownhub.v1.AIProcessTextReply
+	7,  // [7:13] is the sub-list for method output_type
+	1,  // [1:7] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_ownhub_v1_tool_proto_init() }
-func file_ownhub_v1_tool_proto_init() {
-	if File_ownhub_v1_tool_proto != nil {
+func init() { file_api_ownhub_v1_tool_proto_init() }
+func file_api_ownhub_v1_tool_proto_init() {
+	if File_api_ownhub_v1_tool_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ownhub_v1_tool_proto_rawDesc), len(file_ownhub_v1_tool_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_ownhub_v1_tool_proto_rawDesc), len(file_api_ownhub_v1_tool_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_ownhub_v1_tool_proto_goTypes,
-		DependencyIndexes: file_ownhub_v1_tool_proto_depIdxs,
-		MessageInfos:      file_ownhub_v1_tool_proto_msgTypes,
+		GoTypes:           file_api_ownhub_v1_tool_proto_goTypes,
+		DependencyIndexes: file_api_ownhub_v1_tool_proto_depIdxs,
+		MessageInfos:      file_api_ownhub_v1_tool_proto_msgTypes,
 	}.Build()
-	File_ownhub_v1_tool_proto = out.File
-	file_ownhub_v1_tool_proto_goTypes = nil
-	file_ownhub_v1_tool_proto_depIdxs = nil
+	File_api_ownhub_v1_tool_proto = out.File
+	file_api_ownhub_v1_tool_proto_goTypes = nil
+	file_api_ownhub_v1_tool_proto_depIdxs = nil
 }

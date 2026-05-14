@@ -89,6 +89,7 @@ help:
 
 run:
 	kratos run D:\golang\code\ownhub\cmd\ownhub
+	timeout /t 3 /nobreak >nul
 	@echo "🚀 服务已启动"
 	@echo "🌐 打开浏览器: http://localhost:8000"
 	@start http://localhost:8000

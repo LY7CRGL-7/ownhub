@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OwnHub - 短链接+工具箱</title>
+    <title>OwnHub · 短链接 & 工具箱</title>
     <style>
         * {
             margin: 0;
@@ -12,10 +12,11 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #111111;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
         }
 
         .container {
@@ -23,224 +24,362 @@
             margin: 0 auto;
         }
 
-        h1 {
-            text-align: center;
-            color: white;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        /* 极简头部 */
+        .header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaeef2;
+            padding-bottom: 1rem;
         }
 
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+            color: #000000;
+        }
+
+        .sub {
+            color: #5b6e8c;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* 网格布局 */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+            gap: 1.5rem;
         }
 
+        /* 卡片 — 纯黑白灰 */
         .card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: #ffffff;
+            border: 1px solid #eef2f5;
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: box-shadow 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 0 0 1px #e2e8f0;
         }
 
         .card h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e0e0e0;
+            font-size: 1.35rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eef2f5;
+            color: #000;
+            letter-spacing: -0.2px;
         }
 
         .card h3 {
-            color: #764ba2;
-            margin: 15px 0 10px 0;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #4a5b7a;
+            margin: 1.25rem 0 0.75rem 0;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
-            color: #555;
+            font-size: 0.8rem;
             font-weight: 500;
+            color: #2c3e4e;
+            margin-bottom: 0.25rem;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 14px;
-            transition: border-color 0.3s;
+            padding: 0.7rem 0.8rem;
+            font-size: 0.9rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            background: #ffffff;
+            transition: 0.2s;
+            font-family: inherit;
+            color: #111;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #000000;
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
         }
 
         button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000000;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
             cursor: pointer;
-            font-size: 14px;
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
+            letter-spacing: 0.3px;
         }
 
         button:hover {
-            transform: translateY(-2px);
+            background: #2c2c2c;
+            transform: translateY(-1px);
         }
 
         button:active {
             transform: translateY(0);
         }
 
-        .result {
-            margin-top: 15px;
-            padding: 12px;
-            background: #f5f5f5;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            word-break: break-all;
-            max-height: 200px;
+        /* 聊天专用区块 */
+        .chat-container {
+            border: 1px solid #eef2f5;
+            border-radius: 20px;
+            background: #fbfdff;
+            overflow: hidden;
+            margin-bottom: 1.2rem;
+        }
+
+        .chat-messages {
+            height: 320px;
             overflow-y: auto;
+            padding: 1rem;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .chat-bubble {
+            max-width: 85%;
+            padding: 0.6rem 1rem;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+
+        .chat-user {
+            background: #f1f3f7;
+            color: #111;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-ai {
+            background: #eaeef5;
+            color: #111;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            font-family: inherit;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            padding: 0.8rem;
+            border-top: 1px solid #eef2f5;
+            background: #ffffff;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            border-radius: 40px;
+            background: #ffffff;
+        }
+
+        .model-select {
+            width: 110px;
+            font-size: 0.8rem;
+            border-radius: 40px;
+        }
+
+        /* 文本处理按钮组 */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0 10px;
+        }
+
+        .action-buttons button {
+            background: #f1f3f7;
+            color: #1f2a3e;
+            box-shadow: none;
+            border: 1px solid #e2e8f0;
+        }
+
+        .action-buttons button:hover {
+            background: #e2e8f0;
+            transform: none;
+        }
+
+        /* 结果展示区 */
+        .result {
+            margin-top: 1rem;
+            padding: 0.9rem;
+            background: #fafcff;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-family: 'SF Mono', 'Menlo', monospace;
+            border: 1px solid #edf2f7;
+            overflow-x: auto;
+            max-height: 240px;
         }
 
         .result pre {
             white-space: pre-wrap;
-            word-wrap: break-word;
+            font-family: inherit;
+            font-size: 0.8rem;
+            color: #1e2a3a;
         }
 
         .error {
-            background: #fee;
-            color: #c33;
-            border-left: 3px solid #c33;
+            background: #fff6f5;
+            border-left: 3px solid #d32;
+            color: #b91c1c;
         }
 
         .success {
-            background: #efe;
-            color: #3c3;
-            border-left: 3px solid #3c3;
+            background: #f6fef9;
+            border-left: 3px solid #2c6e2c;
         }
 
-        .api-url {
-            font-size: 12px;
-            color: #999;
-            margin-top: 5px;
+        hr {
+            margin: 1rem 0;
+            border: none;
+            border-top: 1px solid #eceff3;
         }
 
-        .short-link {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 12px;
-            margin-top: 5px;
+        .tiny-hint {
+            font-size: 0.7rem;
+            color: #7f8c9a;
+            margin-top: 0.3rem;
         }
 
-        .short-link:hover {
-            background: #764ba2;
-        }
-
-        @media (max-width: 768px) {
+        @media (max-width: 760px) {
+            body {
+                padding: 1rem;
+            }
             .grid {
                 grid-template-columns: 1fr;
             }
-            h1 {
-                font-size: 1.8rem;
+            .chat-messages {
+                height: 280px;
             }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>🚀 OwnHub - 短链接 + 工具箱</h1>
+    <div class="header">
+        <h1>ownhub</h1>
+        <div class="sub">短链接 · 开发者工具 · 轻量 AI</div>
+    </div>
 
     <div class="grid">
-        <!-- 短链接服务 -->
+        <!-- 左侧：短链接服务 (不变但保持风格) -->
         <div class="card">
-            <h2>🔗 短链接服务</h2>
-
-            <!-- 创建短链接 -->
-            <h3>📝 创建短链接</h3>
+            <h2>🔗 短链接</h2>
+            <h3>创建</h3>
             <div class="form-group">
-                <label>原始 URL *</label>
-                <input type="url" id="createUrl" placeholder="https://example.com/very/long/url">
+                <label>原始 URL</label>
+                <input type="url" id="createUrl" placeholder="https://...">
             </div>
             <div class="form-group">
-                <label>自定义 Slug (可选)</label>
-                <input type="text" id="createSlug" placeholder="my-custom-slug">
+                <label>自定义 slug (可选)</label>
+                <input type="text" id="createSlug" placeholder="custom-slug">
             </div>
             <div class="form-group">
                 <label>描述 (可选)</label>
-                <input type="text" id="createDesc" placeholder="链接描述">
+                <input type="text" id="createDesc" placeholder="备注">
             </div>
-            <button onclick="createShortLink()">✨ 创建短链接</button>
+            <button onclick="createShortLink()">生成短链</button>
             <div id="createResult" class="result" style="display:none"></div>
 
-            <!-- 查询短链接详情 -->
-            <h3 style="margin-top: 30px;">🔍 查询短链接详情</h3>
+            <h3 style="margin-top: 1.5rem;">查询详情</h3>
             <div class="form-group">
-                <label>短链接 Code</label>
+                <label>短链 code</label>
                 <input type="text" id="getCode" placeholder="例如: abc123">
             </div>
-            <button onclick="getShortDetail()">📖 查询详情</button>
+            <button onclick="getShortDetail()">查询</button>
             <div id="getResult" class="result" style="display:none"></div>
         </div>
 
-        <!-- 工具箱 -->
+        <!-- 右侧上方：AI 聊天 (全新极简模块) -->
         <div class="card">
-            <h2>🛠️ 工具箱</h2>
+            <h2>🤖 AI 助手</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-bubble chat-ai">👋 你好，我是简约 AI 助手。可以提问、翻译、润色，或让我总结内容。</div>
+                </div>
+                <div class="chat-input-area">
+                    <select id="chatModel" class="model-select">
+                        <option value="deepseek">DeepSeek</option>
+                        <option value="openai">GPT-4o-mini</option>
+                    </select>
+                    <input type="text" id="chatInput" placeholder="输入消息..." autocomplete="off">
+                    <button id="sendChatBtn">发送</button>
+                </div>
+            </div>
+            <div class="tiny-hint">⚡ 支持上下文对话 | 模拟模式开箱即用 (可配置真实 API Key)</div>
 
-            <!-- Ping -->
-            <h3>🏓 Ping</h3>
-            <button onclick="ping()">🏓 Ping 服务</button>
+            <!-- AI 文本处理快捷区 -->
+            <h3 style="margin-top: 1.2rem;">📝 智能文本处理</h3>
+            <div class="form-group">
+                <textarea id="processTextArea" rows="2" placeholder="粘贴需要处理的文本..."></textarea>
+            </div>
+            <div class="action-buttons">
+                <button onclick="processTextAction('translate')">翻译 → 中文</button>
+                <button onclick="processTextAction('summarize')">总结</button>
+                <button onclick="processTextAction('polish')">润色</button>
+                <button onclick="processTextAction('grammar')">语法修正</button>
+            </div>
+            <div id="processResult" class="result" style="display:none"></div>
+        </div>
+
+        <!-- 工具箱区域：Ping / 时间戳 / Token / 摘要  (保留所有功能，纯黑白调) -->
+        <div class="card">
+            <h2>🛠️ 工具</h2>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
+                <button onclick="ping()">🏓 Ping</button>
+                <div style="flex:1"></div>
+            </div>
             <div id="pingResult" class="result" style="display:none"></div>
 
-            <!-- 时间戳 -->
-            <h3 style="margin-top: 20px;">⏰ 时间戳</h3>
+            <h3>⏱️ 时间戳</h3>
             <div class="form-group">
-                <label>时区 (可选)</label>
-                <input type="text" id="timezone" placeholder="Asia/Shanghai">
+                <input type="text" id="timezone" placeholder="时区 (Asia/Shanghai)">
             </div>
-            <button onclick="getTimestamp()">🕐 获取时间戳</button>
+            <button onclick="getTimestamp()">获取时间戳</button>
             <div id="timestampResult" class="result" style="display:none"></div>
 
-            <!-- 生成 Token -->
-            <h3 style="margin-top: 20px;">🔑 生成 Token</h3>
+            <h3>🔑 Token 生成</h3>
             <div class="form-group">
-                <label>长度 (默认32)</label>
-                <input type="number" id="tokenLen" placeholder="32" value="32">
+                <input type="number" id="tokenLen" placeholder="长度" value="32">
             </div>
-            <button onclick="generateToken()">🎲 生成 Token</button>
+            <button onclick="generateToken()">生成</button>
             <div id="tokenResult" class="result" style="display:none"></div>
 
-            <!-- 文本摘要 -->
-            <h3 style="margin-top: 20px;">📊 文本摘要 (Digest)</h3>
+            <h3>🔐 摘要 (Digest)</h3>
             <div class="form-group">
-                <label>文本内容</label>
-                <textarea id="digestText" rows="3" placeholder="请输入要计算摘要的文本..."></textarea>
+                <textarea id="digestText" rows="2" placeholder="文本内容"></textarea>
             </div>
-            <div class="form-group">
-                <label>算法</label>
-                <select id="digestAlgo">
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <select id="digestAlgo" style="width: auto; flex:1">
                     <option value="md5">MD5</option>
                     <option value="sha1">SHA1</option>
                     <option value="sha256" selected>SHA256</option>
                     <option value="sha512">SHA512</option>
                 </select>
+                <button onclick="digestText()">计算</button>
             </div>
-            <button onclick="digestText()">🔐 计算摘要</button>
             <div id="digestResult" class="result" style="display:none"></div>
         </div>
     </div>
@@ -249,18 +388,13 @@
 <script>
     const API_BASE = '/api/v1';
 
-    // 通用请求函数
+    // ---------- 通用请求 ----------
     async function apiRequest(url, method, body = null) {
         const options = {
             method: method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
         };
-        if (body) {
-            options.body = JSON.stringify(body);
-        }
-
+        if (body) options.body = JSON.stringify(body);
         try {
             const response = await fetch(url, options);
             const data = await response.json();
@@ -270,158 +404,161 @@
         }
     }
 
-    // 显示结果
     function showResult(elementId, data, isError = false) {
-        const element = document.getElementById(elementId);
-        element.style.display = 'block';
-        element.className = `result ${isError ? 'error' : 'success'}`;
-        element.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        el.style.display = 'block';
+        el.className = `result ${isError ? 'error' : 'success'}`;
+        el.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
     }
 
-    // 1. 创建短链接
+    // ---------- 短链接 ----------
     async function createShortLink() {
         const url = document.getElementById('createUrl').value;
+        if (!url) { showResult('createResult', { error: '请输入 URL' }, true); return; }
         const slug = document.getElementById('createSlug').value;
-        const description = document.getElementById('createDesc').value;
-
-        if (!url) {
-            showResult('createResult', { error: '请填写原始 URL' }, true);
-            return;
-        }
-
+        const desc = document.getElementById('createDesc').value;
         const body = { url };
         if (slug) body.slug = slug;
-        if (description) body.description = description;
-
-        const result = await apiRequest(`${API_BASE}/short-links`, 'POST', body);
-        if (result.success) {
-            showResult('createResult', {
-                success: '创建成功！',
-                code: result.data.code,
-                short_url: result.data.short_url,
-                full_url: `${window.location.origin}/s/${result.data.code}`
-            });
-            // 清空输入
+        if (desc) body.description = desc;
+        const res = await apiRequest(`${API_BASE}/short-links`, 'POST', body);
+        if (res.success) {
+            showResult('createResult', { success: '创建成功', code: res.data.code, short_url: res.data.short_url });
             document.getElementById('createUrl').value = '';
             document.getElementById('createSlug').value = '';
             document.getElementById('createDesc').value = '';
-        } else {
-            showResult('createResult', result.data || { error: '创建失败' }, true);
-        }
+        } else showResult('createResult', res.data || { error: '创建失败' }, true);
     }
 
-    // 2. 查询短链接详情
     async function getShortDetail() {
         const code = document.getElementById('getCode').value;
-        if (!code) {
-            showResult('getResult', { error: '请填写短链接 Code' }, true);
-            return;
-        }
-
-        const result = await apiRequest(`${API_BASE}/short-links/${code}/detail`, 'GET');
-        if (result.success) {
-            showResult('getResult', {
-                code: result.data.code,
-                url: result.data.url,
-                short_url: result.data.short_url,
-                description: result.data.description,
-                created_at: new Date(result.data.created_at_unix * 1000).toLocaleString()
-            });
-        } else {
-            showResult('getResult', result.data || { error: '未找到该短链接' }, true);
-        }
+        if (!code) { showResult('getResult', { error: '请输入 code' }, true); return; }
+        const res = await apiRequest(`${API_BASE}/short-links/${code}/detail`, 'GET');
+        if (res.success) showResult('getResult', res.data);
+        else showResult('getResult', res.data || { error: '未找到' }, true);
     }
 
-    // 3. Ping
+    // ---------- 原有工具 ----------
     async function ping() {
-        const result = await apiRequest(`${API_BASE}/tools/ping`, 'GET');
-        if (result.success) {
-            showResult('pingResult', {
-                service: result.data.service,
-                version: result.data.version,
-                now: result.data.now,
-                status: '✅ 服务正常运行'
-            });
-        } else {
-            showResult('pingResult', { error: 'Ping 失败' }, true);
-        }
+        const res = await apiRequest(`${API_BASE}/tools/ping`, 'GET');
+        if (res.success) showResult('pingResult', res.data);
+        else showResult('pingResult', { error: 'ping失败' }, true);
     }
-
-    // 4. 获取时间戳
     async function getTimestamp() {
-        const timezone = document.getElementById('timezone').value;
+        const tz = document.getElementById('timezone').value;
         let url = `${API_BASE}/tools/timestamp`;
-        if (timezone) {
-            url += `?timezone=${encodeURIComponent(timezone)}`;
-        }
-
-        const result = await apiRequest(url, 'GET');
-        if (result.success) {
-            showResult('timestampResult', {
-                unix: result.data.unix,
-                rfc3339: result.data.rfc3339,
-                timezone: result.data.timezone || timezone || 'UTC',
-                local_time: new Date(result.data.unix * 1000).toLocaleString()
-            });
-        } else {
-            showResult('timestampResult', result.data || { error: '获取失败' }, true);
-        }
+        if (tz) url += `?timezone=${encodeURIComponent(tz)}`;
+        const res = await apiRequest(url, 'GET');
+        if (res.success) showResult('timestampResult', res.data);
+        else showResult('timestampResult', res.data || { error: '获取失败' }, true);
     }
-
-    // 5. 生成 Token
     async function generateToken() {
-        let length = parseInt(document.getElementById('tokenLen').value);
-        if (isNaN(length) || length < 1) length = 32;
-        if (length > 1024) length = 1024;
-
-        const result = await apiRequest(`${API_BASE}/tools/token`, 'POST', { length });
-        if (result.success) {
-            showResult('tokenResult', {
-                token: result.data.token,
-                length: result.data.length,
-                hint: '请妥善保管此 Token'
-            });
-        } else {
-            showResult('tokenResult', result.data || { error: '生成失败' }, true);
-        }
+        let len = parseInt(document.getElementById('tokenLen').value) || 32;
+        if (len > 512) len = 512;
+        const res = await apiRequest(`${API_BASE}/tools/token`, 'POST', { length: len });
+        if (res.success) showResult('tokenResult', res.data);
+        else showResult('tokenResult', res.data || { error: '生成失败' }, true);
     }
-
-    // 6. 文本摘要
     async function digestText() {
         const text = document.getElementById('digestText').value;
-        const algorithm = document.getElementById('digestAlgo').value;
+        const algo = document.getElementById('digestAlgo').value;
+        if (!text) { showResult('digestResult', { error: '请输入文本' }, true); return; }
+        const res = await apiRequest(`${API_BASE}/tools/digest`, 'POST', { text, algorithm: algo });
+        if (res.success) showResult('digestResult', res.data);
+        else showResult('digestResult', res.data || { error: '计算失败' }, true);
+    }
 
-        if (!text) {
-            showResult('digestResult', { error: '请输入文本内容' }, true);
-            return;
-        }
+    // ---------- AI 聊天 (完整实现，会话上下文) ----------
+    let chatHistory = [];   // 存储 {role, content}
 
-        const result = await apiRequest(`${API_BASE}/tools/digest`, 'POST', { text, algorithm });
-        if (result.success) {
-            showResult('digestResult', {
-                algorithm: result.data.algorithm,
-                digest: result.data.digest,
-                length: result.data.digest.length,
-                input_length: text.length
+    const chatMessagesDiv = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendChatBtn');
+    const modelSelect = document.getElementById('chatModel');
+
+    function addChatMessage(role, content) {
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble ${role === 'user' ? 'chat-user' : 'chat-ai'}`;
+        bubble.innerText = content;
+        chatMessagesDiv.appendChild(bubble);
+        chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+    }
+
+    async function sendMessage() {
+        const message = chatInput.value.trim();
+        if (!message) return;
+        // 显示用户消息
+        addChatMessage('user', message);
+        chatInput.value = '';
+
+        // 准备请求 (附带最近10条历史，节约token)
+        const recentHistory = chatHistory.slice(-10);
+        const model = modelSelect.value;
+
+        try {
+            const response = await fetch(`${API_BASE}/tools/ai/chat`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: message,
+                    model: model,
+                    history: recentHistory
+                })
             });
-        } else {
-            showResult('digestResult', result.data || { error: '计算失败' }, true);
+            const data = await response.json();
+            const aiReply = data.response || data.message || "无响应";
+            addChatMessage('ai', aiReply);
+            // 更新历史
+            chatHistory.push({ role: 'user', content: message });
+            chatHistory.push({ role: 'assistant', content: aiReply });
+            if (chatHistory.length > 30) chatHistory = chatHistory.slice(-24);
+        } catch (err) {
+            addChatMessage('ai', `请求失败: ${err.message}`);
         }
     }
 
-    // 添加回车键支持
-    document.getElementById('createUrl')?.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') createShortLink();
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
     });
-    document.getElementById('getCode')?.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') getShortDetail();
-    });
-    document.getElementById('digestText')?.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            digestText();
+
+    // ---------- AI 文本处理 (调用 process 接口) ----------
+    async function processTextAction(action) {
+        const text = document.getElementById('processTextArea').value.trim();
+        if (!text) {
+            showResult('processResult', { error: '请填写需要处理的文本' }, true);
+            return;
         }
-    });
+        let targetLang = '';
+        if (action === 'translate') {
+            targetLang = prompt('目标语言 (例如: 中文, English, 日语)', '中文');
+            if (targetLang === null) return;
+        }
+        const payload = {
+            text: text,
+            action: action,
+            target_lang: targetLang || ''
+        };
+        const res = await apiRequest(`${API_BASE}/tools/ai/process`, 'POST', payload);
+        if (res.success) {
+            showResult('processResult', {
+                action: action,
+                original: text.length > 120 ? text.substring(0,120)+'…' : text,
+                processed: res.data.processed || res.data.result
+            });
+        } else {
+            showResult('processResult', res.data || { error: '处理失败' }, true);
+        }
+    }
+
+    // 挂载全局函数供按钮调用
+    window.createShortLink = createShortLink;
+    window.getShortDetail = getShortDetail;
+    window.ping = ping;
+    window.getTimestamp = getTimestamp;
+    window.generateToken = generateToken;
+    window.digestText = digestText;
+    window.processTextAction = processTextAction;
 </script>
 </body>
 </html>
